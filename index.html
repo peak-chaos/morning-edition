@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Morning Edition — 22 April 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,300;1,9..144,400;1,9..144,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ivory:    #FAF9F4;
+    --canary:   #FEE19A;
+    --sky:      #D3E9EE;
+    --teal:     #35656E;
+    --charcoal: #394646;
+    --taupe:    #DED8CE;
+    --khaki:    #9A9389;
+    --copper:   #E6804C;
+    --sage:     #615D58;
+    --mint:     #DDF1DA;
+    --marigold: #DAAB4F;
+    --peach:    #FFDDCC;
+    --lemon:    #FFF4CE;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--ivory);
+    color: var(--charcoal);
+    font-family: 'Inter', sans-serif;
+    font-size: 17px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--charcoal);
+    border-bottom: 3px solid var(--canary);
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 56px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .nav-brand {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--canary);
+    letter-spacing: -0.02em;
+    white-space: nowrap;
+    padding: 8px 0;
+  }
+  .nav-brand span { color: var(--ivory); font-weight: 300; font-style: italic; }
+  .nav-links {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    padding: 8px 0;
+  }
+  .nav-links a {
+    color: rgba(250,249,244,0.65);
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    padding: 4px 10px;
+    border: 1px solid rgba(250,249,244,0.15);
+    border-radius: 20px;
+    transition: all 0.15s;
+    white-space: nowrap;
+  }
+  .nav-links a:hover { background: rgba(254,225,154,0.15); color: var(--canary); border-color: var(--canary); }
+
+  /* ── COVER ── */
+  .cover {
+    background: var(--canary);
+    padding: 80px 40px 70px;
+    position: relative;
+    overflow: hidden;
+  }
+  .cover-inner { max-width: 900px; margin: 0 auto; }
+  .cover-eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .cover-eyebrow::after { content: ''; display: block; height: 1px; width: 48px; background: var(--teal); opacity: 0.4; }
+  .cover-headline {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(72px, 12vw, 128px);
+    font-weight: 900;
+    line-height: 0.92;
+    letter-spacing: -0.03em;
+    color: var(--charcoal);
+    margin-bottom: 28px;
+  }
+  .cover-headline em { font-style: italic; color: var(--teal); }
+  .cover-meta {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+    align-items: center;
+    border-top: 1px solid rgba(57,70,70,0.2);
+    padding-top: 24px;
+    margin-top: 12px;
+  }
+  .cover-meta-item { font-size: 13px; color: var(--sage); }
+  .cover-meta-item strong { color: var(--charcoal); font-weight: 600; }
+  .cover-badge {
+    background: var(--teal);
+    color: var(--ivory);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 20px;
+  }
+
+  /* ── STORY BASE ── */
+  .story {
+    padding: 72px 40px;
+    position: relative;
+  }
+  .story-inner { max-width: 820px; margin: 0 auto; }
+  .story-num {
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    line-height: 1;
+    opacity: 0.12;
+    position: absolute;
+    top: 40px;
+    right: 40px;
+    pointer-events: none;
+    user-select: none;
+  }
+  .story-tag {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .urgent::before {
+    content: '⚡';
+    font-size: 14px;
+  }
+  .story h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 22px;
+  }
+  .story p {
+    font-size: 18px;
+    line-height: 1.65;
+    margin-bottom: 18px;
+    max-width: 720px;
+  }
+  .story p:last-of-type { margin-bottom: 0; }
+  .story-source {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 28px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    opacity: 0.55;
+  }
+  .story-source::before { content: '↗'; font-size: 14px; }
+  .pull-quote {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(28px, 4vw, 44px);
+    font-style: italic;
+    font-weight: 400;
+    line-height: 1.2;
+    padding: 32px 0;
+    border-top: 3px solid;
+    border-bottom: 3px solid;
+    margin: 36px 0;
+    max-width: 720px;
+  }
+
+  /* ── S1: HERO IVORY + BIG NUMERAL ── */
+  .s1 { background: var(--ivory); }
+  .s1 .story-num { font-size: 280px; color: var(--charcoal); top: 20px; right: 20px; }
+  .s1 .story-tag { color: var(--teal); }
+  .s1 h2 { font-size: clamp(42px, 6vw, 72px); color: var(--charcoal); }
+  .s1 .pull-quote { border-color: var(--teal); color: var(--teal); }
+
+  /* ── S2: MIDNIGHT/DARK ── */
+  .s2 { background: var(--charcoal); }
+  .s2 .story-num { font-size: 260px; color: var(--canary); opacity: 0.08; }
+  .s2 .story-tag { color: var(--canary); }
+  .s2 h2 { font-size: clamp(38px, 5.5vw, 68px); color: var(--ivory); }
+  .s2 p { color: rgba(250,249,244,0.82); }
+  .s2 .story-source { color: var(--ivory); }
+  .s2 .pull-quote { border-color: var(--canary); color: var(--canary); }
+  .s2 .alert-stamp {
+    display: inline-block;
+    background: var(--copper);
+    color: white;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    transform: rotate(-1.5deg);
+  }
+
+  /* ── S3: CANARY FULL ── */
+  .s3 { background: var(--canary); }
+  .s3 .story-num { font-size: 300px; color: var(--marigold); opacity: 0.25; }
+  .s3 .story-tag { color: var(--teal); }
+  .s3 h2 { font-size: clamp(40px, 6vw, 70px); color: var(--charcoal); }
+  .s3 .pull-quote { border-color: var(--teal); color: var(--teal); }
+
+  /* ── S4: TERMINAL ── */
+  .s4 { background: #1a2424; }
+  .s4 .story-num { font-size: 240px; color: var(--mint); opacity: 0.06; }
+  .s4 .story-tag { color: var(--mint); font-family: 'Inter', monospace; }
+  .s4 h2 { font-size: clamp(36px, 5vw, 62px); color: var(--mint); }
+  .s4 p { color: rgba(221,241,218,0.8); font-family: 'Inter', sans-serif; }
+  .s4 .story-source { color: var(--mint); }
+  .s4 .terminal-prefix { color: var(--canary); font-family: 'Inter', monospace; font-size: 13px; margin-bottom: 10px; display: block; }
+  .s4 .pull-quote { border-color: var(--mint); color: var(--mint); }
+
+  /* ── S5: ROSE / PEACH ALERT ── */
+  .s5 { background: var(--peach); }
+  .s5 .story-num { font-size: 260px; color: var(--copper); opacity: 0.18; }
+  .s5 .story-tag { color: var(--copper); }
+  .s5 h2 { font-size: clamp(40px, 6vw, 68px); color: var(--charcoal); }
+  .s5 .pull-quote { border-color: var(--copper); color: var(--copper); }
+  .s5 .alert-chip {
+    display: inline-block;
+    background: var(--copper);
+    color: white;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+  }
+
+  /* ── S6: SKY ACADEMIC ── */
+  .s6 { background: var(--sky); }
+  .s6 .story-num { font-size: 280px; color: var(--teal); opacity: 0.1; }
+  .s6 .story-tag { color: var(--teal); }
+  .s6 .drop-cap::first-letter {
+    font-family: 'Fraunces', serif;
+    font-size: 112px;
+    font-weight: 900;
+    float: left;
+    line-height: 0.75;
+    margin-right: 14px;
+    margin-top: 10px;
+    color: var(--teal);
+  }
+  .s6 h2 { font-size: clamp(38px, 5.5vw, 64px); color: var(--charcoal); }
+  .s6 .pull-quote { border-color: var(--teal); color: var(--teal); }
+
+  /* ── S7: STAT SPREAD ── */
+  .s7 { background: var(--ivory); border-top: 6px solid var(--teal); }
+  .s7 .story-num { font-size: 260px; color: var(--taupe); opacity: 0.5; }
+  .s7 .story-tag { color: var(--teal); }
+  .s7 h2 { font-size: clamp(38px, 5.5vw, 64px); color: var(--charcoal); }
+  .big-stat {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(80px, 14vw, 160px);
+    font-weight: 900;
+    line-height: 0.85;
+    color: var(--teal);
+    letter-spacing: -0.04em;
+    display: block;
+    margin: 32px 0 8px;
+  }
+  .big-stat-label {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--khaki);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 32px;
+  }
+  .s7 .pull-quote { border-color: var(--teal); color: var(--teal); }
+
+  /* ── S8: MAGAZINE PULL QUOTE / LEMON ── */
+  .s8 { background: var(--lemon); }
+  .s8 .story-num { font-size: 260px; color: var(--marigold); opacity: 0.2; }
+  .s8 .story-tag { color: var(--sage); }
+  .s8 h2 { font-size: clamp(38px, 5.5vw, 66px); color: var(--charcoal); }
+  .s8 .pull-quote { border-color: var(--marigold); color: var(--sage); }
+  .s8 .mag-pull {
+    background: var(--marigold);
+    padding: 40px;
+    border-radius: 6px;
+    margin: 36px 0;
+    max-width: 720px;
+  }
+  .s8 .mag-pull p {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: clamp(22px, 3vw, 36px);
+    line-height: 1.25;
+    color: var(--charcoal);
+    margin: 0;
+  }
+
+  /* ── S9: MINT/EVERGREEN ── */
+  .s9 { background: var(--mint); }
+  .s9 .story-num { font-size: 260px; color: #51714B; opacity: 0.12; }
+  .s9 .story-tag { color: #51714B; }
+  .s9 h2 { font-size: clamp(38px, 5.5vw, 64px); color: var(--charcoal); }
+  .s9 .pull-quote { border-color: #51714B; color: #51714B; }
+
+  /* ── S10: BIG-STAT FINISH / TEAL DARK ── */
+  .s10 { background: var(--teal); }
+  .s10 .story-num { font-size: 280px; color: var(--canary); opacity: 0.08; }
+  .s10 .story-tag { color: var(--canary); }
+  .s10 h2 { font-size: clamp(38px, 5.5vw, 64px); color: var(--ivory); }
+  .s10 p { color: rgba(250,249,244,0.85); }
+  .s10 .story-source { color: var(--ivory); }
+  .s10 .pull-quote { border-color: var(--canary); color: var(--canary); }
+  .s10 .big-stat { color: var(--canary); }
+  .s10 .big-stat-label { color: rgba(250,249,244,0.65); }
+
+  /* ── DIVIDER ── */
+  .divider {
+    height: 1px;
+    background: var(--taupe);
+    margin: 0;
+  }
+
+  /* ── PHOTO BANNER ── */
+  .photo-banner {
+    width: 100%;
+    height: 320px;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--charcoal);
+    padding: 48px 40px;
+    text-align: center;
+  }
+  footer .footer-title {
+    font-family: 'Fraunces', serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--canary);
+    margin-bottom: 10px;
+  }
+  footer p {
+    font-size: 13px;
+    color: rgba(250,249,244,0.45);
+    line-height: 1.6;
+  }
+  footer .go1-logo { margin-bottom: 20px; }
+
+  /* scrollbar cosmetic */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--charcoal); }
+  ::-webkit-scrollbar-thumb { background: var(--canary); border-radius: 3px; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">Morning <span>Edition</span></div>
+  <div class="nav-links">
+    <a href="#s1">01 AI Gatekeepers</a>
+    <a href="#s2">02 Hallucinated Brands</a>
+    <a href="#s3">03 The AI Trap</a>
+    <a href="#s4">04 LinkedIn Ate the Blog</a>
+    <a href="#s5">05 Organic Traffic RIP</a>
+    <a href="#s6">06 L&D AI Gap</a>
+    <a href="#s7">07 AI vs Workers</a>
+    <a href="#s8">08 Meme Culture Mandate</a>
+    <a href="#s9">09 Meta's Auto-Ad Machine</a>
+    <a href="#s10">10 RTO Bluff</a>
+  </div>
+</nav>
+
+<!-- COVER -->
+<section class="cover">
+  <div class="cover-inner">
+    <div class="cover-eyebrow">Wednesday, 22 April 2026 &nbsp;·&nbsp; Vol. 1</div>
+    <h1 class="cover-headline">Morning<br><em>Edition</em></h1>
+    <div class="cover-meta">
+      <div class="cover-meta-item">Curated for <strong>Angela Allan</strong></div>
+      <div class="cover-meta-item">Campaign Content Manager, <strong>Go1</strong></div>
+      <div class="cover-badge">10 Stories</div>
+      <div class="cover-meta-item" style="margin-left:auto; font-size:12px; color: var(--sage);">Sources: HBR · Wired · Marketing Brew · Demand Gen Report · AdAge · Fast Company · The Verge · Platformer</div>
+    </div>
+  </div>
+</section>
+
+<!-- STORY 1 -->
+<section class="story s1" id="s1">
+  <div class="story-num">01</div>
+  <div class="story-inner">
+    <div class="story-tag urgent" style="color: var(--copper);">⚡ Urgent — B2B Marketing</div>
+    <h2>AI Agents Are Now Your Buyer's Gatekeeper. Your Content Isn't Ready.</h2>
+    <p>Two revolutions are happening simultaneously in B2B marketing, and most teams are only paying attention to one. The first: AI is replacing search as how buyers research products — two-thirds of Gen Zers and more than half of Millennials now use LLMs to research before ever hitting your website. The second, and the one that should keep you up at night: agentic AI is starting to <em>make</em> purchasing decisions on behalf of humans. Not help them decide. <em>Decide.</em> Gartner estimates 40% of enterprise apps will integrate task-specific AI agents by end of 2026 — up from less than 5% in 2025.</p>
+    <p>For your Go1 campaigns, this is a fundamental brief change. Your content now needs to work for two audiences at once: the L&D leader reading your email, and the AI agent that might be triaging their inbox or pre-filtering vendor shortlists on their behalf. That means structured, explicit, claim-rich content wins over clever creative. The brands that get into the AI agent's consideration set early will lock out competitors before the human even opens a tab.</p>
+    <div class="pull-quote">
+      "The dividing line in 2026 is between marketing orgs that are AI-enhanced — and those that are truly AI-native."
+    </div>
+    <div class="story-source">Harvard Business Review · Demand Gen Report · B2BMX 2026</div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- STORY 2 -->
+<section class="story s2" id="s2">
+  <div class="story-num">02</div>
+  <div class="story-inner">
+    <div class="alert-stamp">⚡ Action Required</div>
+    <div class="story-tag" style="color: var(--canary); letter-spacing: 0.15em; text-transform: uppercase; font-size: 11px; font-weight: 600;">Brand Risk · AI</div>
+    <h2>Your Brand Is Being Hallucinated. Time to Find Out What AI Says About Go1.</h2>
+    <p>Pernod Ricard's head of digital found out the hard way: their affordable Scotch whiskey Ballantine's was being described by leading LLMs as a prestige product. Incorrect. Not malicious. Just hallucinated. This is the new brand reputation risk that zero comms teams have a playbook for — yet. Two-thirds of Gen Z and over half of Millennials are now researching products through AI before ever visiting a brand's website, which means what ChatGPT, Gemini, and Perplexity say about your company <em>is</em> your first impression.</p>
+    <p>For Go1, this is genuinely urgent. Run an audit: ask the major LLMs what Go1 does, who it's for, what differentiates it. Then compare it to your actual positioning. Gaps between AI description and reality aren't just a PR problem — they're a pipeline problem. The HBR piece on "Preparing Your Brand for Agentic AI" (March-April 2026 issue) frames it clearly: you need to feed the models accurate, structured information, or they'll fill the gap with whatever they scraped three years ago. This is newsletter gold for "Ban Boring B2B" too — most B2B brands have no idea what AI thinks of them.</p>
+    <div class="pull-quote">
+      "LLM data was often incomplete or incorrect — one model miscategorised Ballantine's as a prestige product."
+    </div>
+    <div class="story-source">Harvard Business Review — Preparing Your Brand for Agentic AI</div>
+  </div>
+</section>
+
+<img class="photo-banner" src="https://images.prismic.io/go1-com/Z-vXJXdAxsiBwK9F_manspeakingtoaroomofpeople.jpeg?auto=format,compress" alt="Business presentation" />
+
+<!-- STORY 3 -->
+<section class="story s3" id="s3">
+  <div class="story-num">03</div>
+  <div class="story-inner">
+    <div class="story-tag urgent" style="color: var(--teal);">⚡ Campaign Strategy · AI</div>
+    <h2>The AI Trap: More Automation Doesn't Mean More Pipeline — And B2BMX Just Proved It</h2>
+    <p>The biggest lesson coming out of B2BMX West 2026: B2B marketers are over-automating and under-strategising. The "AI trap" is when teams replace human judgment with AI volume — cranking out more content, more emails, more touchpoints — without asking whether any of it is actually building trust. The stat that landed hardest: 45% of B2B buyers say they are less likely to consider a vendor if initial outreach feels synthetic. We're producing more. Buyers are trusting less.</p>
+    <p>The winning playbook from the conference was actually the old playbook dressed up in new vocabulary: genuine insight, clear POV, human editorial voice — with AI as accelerator, not author. For your "Ban Boring B2B" newsletter, this is the argument you've already been making. Now you've got the research to back it up. For Go1 campaigns specifically, the implication is to double down on the distinctive POV: what does Go1 believe about workplace learning that others don't? Make AI write that, not just describe the product.</p>
+    <div class="pull-quote" style="border-color: var(--teal); color: var(--teal);">
+      "45% of buyers are less likely to consider a vendor if outreach feels synthetic. We're producing more. Buyers are trusting less."
+    </div>
+    <div class="story-source">Demand Gen Report · B2BMX West 2026</div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- STORY 4 -->
+<section class="story s4" id="s4">
+  <div class="story-num">04</div>
+  <div class="story-inner">
+    <span class="terminal-prefix">$ linkedin --status Q1-2026</span>
+    <div class="story-tag" style="letter-spacing: 0.12em; text-transform: uppercase; font-size: 11px; font-weight: 600;">Content Strategy · LinkedIn</div>
+    <h2>LinkedIn Ate the Blog. Your Company Page Is a Ghost Town. Your Personal Profile Is the Brand Now.</h2>
+    <p>LinkedIn just published data that should fundamentally reshape how Go1 thinks about its content infrastructure: personal profiles generate 8x more engagement than company pages posting identical content. Not better content. Identical content. The algorithm has made its choice, and it's chosen the human. Meanwhile, LinkedIn newsletters grew 150% year-over-year, with the top 1% exceeding 100,000 subscribers. Sixty percent of B2B buyers now discover brands through creator content before ever filling out a form.</p>
+    <p>Here's what this means for you specifically. Your "Ban Boring B2B" newsletter on LinkedIn isn't a side project — it's Go1's best-performing brand asset, even if the company hasn't officially recognised it as such yet. The smart play for Go1 campaigns: get more employees to post, use Thought Leader Ads to amplify the best-performing personal content, and pivot the company page toward being a distribution hub rather than a content originator. For your newsletter audience of marketing leaders, this is the topic of the moment. Everyone's asking whether to kill their company blog. The answer is basically yes — at least as a first channel.</p>
+    <div class="pull-quote">
+      "60% of B2B buyers discover brands through creator content before filling out a form."
+    </div>
+    <div class="story-source">LinkedIn · B2B Marketing Data 2026</div>
+  </div>
+</section>
+
+<img class="photo-banner" src="https://images.prismic.io/go1-com/Z--nbndAxsiBwUX7_CandidshotwomanatconferencetableLarge.jpeg?auto=format,compress" alt="Candid shot, woman at conference table" />
+
+<!-- STORY 5 -->
+<section class="story s5" id="s5">
+  <div class="story-num">05</div>
+  <div class="story-inner">
+    <div class="alert-chip">⚡ Urgent</div>
+    <div class="story-tag" style="color: var(--copper); letter-spacing: 0.15em; text-transform: uppercase; font-size: 11px; font-weight: 600;">SEO · Content Distribution</div>
+    <h2>Google's AI Overviews Are Eating Your Traffic. Here's What a 47% CTR Drop Actually Means for B2B Content.</h2>
+    <p>Roughly 25–48% of all Google searches now trigger an AI Overview — a stat that varies wildly by category, with B2B tech and HR software at the higher end. Studies are confirming what everyone suspected: when an AI Overview appears, organic click-through rates drop anywhere from 15% to 47%. For any B2B content strategy still optimised around "rank for keywords and drive clicks," this is a structural crisis. Your content can be ranking #1 and still be invisible to the buyer — because Google answered the question before they clicked.</p>
+    <p>The reframe that's gaining traction: the new goal isn't to rank for a query, it's to be the answer that Google's AI cites. That means structured, authoritative, specific content that's easily extractable. The sites getting cited aren't always the biggest — they're the clearest. For Go1, this changes what "good" content looks like. Fewer "ultimate guide to onboarding" posts. More "Go1's data on L&D ROI" and "here's a specific stat about how organisations use Go1." Think quotable. Think citable. Think: what would an AI reach for to support a claim about workplace learning?</p>
+    <div class="pull-quote">
+      "Your content can rank #1 and still be invisible — because Google answered the question before they clicked."
+    </div>
+    <div class="story-source">ALM Corp Digital Marketing News · April 2026</div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- STORY 6 -->
+<section class="story s6" id="s6">
+  <div class="story-num">06</div>
+  <div class="story-inner">
+    <div class="story-tag" style="color: var(--teal); letter-spacing: 0.15em; text-transform: uppercase; font-size: 11px; font-weight: 600;">L&D · EdTech · Go1 Core</div>
+    <h2>61% of L&D Teams Say They're Using AI. Their Real Problem Is They Don't Know What to Do With It.</h2>
+    <p class="drop-cap">A new enterprise L&D survey lands with the kind of number that should be front and centre in every Go1 sales deck: 61% of organisations have fully or partially adopted AI into their L&D programs — or are currently testing it. Sounds impressive until you read the rest. The same survey found that adoption is being blocked by three things: gaps in AI literacy among L&D practitioners, unclear implementation plans, and weak infrastructure. Translation: most L&D teams have bought the tool and are now standing in front of it, confused.</p>
+    <p>This is Go1's moment. The "we have the platform" message isn't enough anymore — the market needs "we have the platform <em>and</em> a clear path through the confusion." For campaign content, this survey is a gift. Build around the three blockers: literacy (educational content), implementation (case studies and playbooks), infrastructure (how Go1 integrates with existing tools). That's a quarter's worth of campaign structure right there. For the "Ban Boring B2B" angle: most EdTech marketing is still leading with features. The opportunity is to lead with the problem — the paralysis is real, and it's under-discussed.</p>
+    <div class="pull-quote">
+      "61% say they're testing AI in L&D. The real story: most don't know what to do next."
+    </div>
+    <div class="story-source">Intellum · Training Industry · 2026 L&D Research</div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- STORY 7 -->
+<section class="story s7" id="s7">
+  <div class="story-num">07</div>
+  <div class="story-inner">
+    <div class="story-tag" style="color: var(--teal); letter-spacing: 0.15em; text-transform: uppercase; font-size: 11px; font-weight: 600;">Workplace Culture · HBR</div>
+    <h2>Workers Don't Fear AI Taking Their Jobs. They Fear AI Making Them Feel Incompetent.</h2>
+    <span class="big-stat">3x</span>
+    <div class="big-stat-label">higher disengagement risk from AI competence threat vs. job security fear</div>
+    <p>The HBR piece "Why Gen AI Feels So Threatening to Workers" (March 2026) reframes the workplace AI anxiety story in a way that matters for Go1. It's not the "AI will replace me" fear driving the most disengagement. It's the subtler threat: AI is making workers feel like they're losing their competence, autonomy, and sense of belonging. When a tool can produce in minutes what took you days to master, your expertise feels devalued — even if you're not losing your job.</p>
+    <p>For Go1 campaigns, this is the insight that unlocks a different campaign angle. The question isn't "will AI take your employees' jobs?" — every competitor is already writing that content. The question is: "how does your L&D strategy protect your workforce's confidence and capability as AI changes the work?" Go1's positioning as the place that helps people grow into the future (not just survive it) maps directly onto this anxiety. For your newsletter: this is ripe for a piece on why L&D leaders should care about psychological safety in the AI transition, not just skills training.</p>
+    <div class="story-source">Harvard Business Review — Why Gen AI Feels So Threatening to Workers · March 2026</div>
+  </div>
+</section>
+
+<img class="photo-banner" src="https://images.prismic.io/go1-com/Z-vdt3dAxsiBwLEi_womanwithstripedshirtspeakingtoroomofpeople.jpeg?auto=format,compress" alt="Woman speaking to room of people" />
+
+<!-- STORY 8 -->
+<section class="story s8" id="s8">
+  <div class="story-num">08</div>
+  <div class="story-inner">
+    <div class="story-tag" style="color: var(--sage); letter-spacing: 0.15em; text-transform: uppercase; font-size: 11px; font-weight: 600;">Internet Culture · Meme Marketing</div>
+    <h2>63% of Consumers Now Expect Brands to Participate in Meme Culture. B2B Is Still Pretending It Doesn't Apply.</h2>
+    <p>Nielsen's 2026 Consumer Expectations Survey has the number: 63% of respondents now expect brands to actively participate in meme culture, up from 41% in 2025. Among Gen Z that hits 78%. And yes, before you think "that's a B2C thing" — the same Gen Zers now entering the workforce are the buyers you'll be selling to in three years. The brands winning right now understand three things: timing, cultural fluency, and keeping it real. The brands losing are the ones whose social team spends two weeks approving a meme that was relevant for 48 hours.</p>
+    <div class="mag-pull">
+      <p>"The brands winning at meme marketing actually live and breathe internet culture — their teams aren't translating it, they're generating it."</p>
+    </div>
+    <p>For B2B specifically, the opening is enormous precisely because the bar is so low. Most B2B social content is still corporate-broadcast mode. A single well-timed, self-aware meme from Go1's account — something that pokes fun at generic L&D content, or the pain of mandatory compliance training — would land disproportionately hard. For "Ban Boring B2B," this is basically your entire thesis in data form. Write the piece: why B2B marketers keep saying "memes aren't for us" and why they're wrong.</p>
+    <div class="story-source">Nielsen Consumer Expectations 2026 · Pulse Advertising</div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- STORY 9 -->
+<section class="story s9" id="s9">
+  <div class="story-num">09</div>
+  <div class="story-inner">
+    <div class="story-tag" style="color: #51714B; letter-spacing: 0.15em; text-transform: uppercase; font-size: 11px; font-weight: 600;">Ad Tech · AI Automation</div>
+    <h2>Meta Just Built an Ad Machine That Runs Itself. Great for Small Brands. Complicated for Everyone Else.</h2>
+    <p>Meta is building a full-auto advertising system: submit a product URL and a budget, and the AI handles images, video, copy, targeting, platform selection, and bid optimisation. No brief. No creative team. No media planner. The early data from campaigns using Meta's AI-managed setups show 22% higher ROI, 32% more conversions, and 29% lower acquisition costs than manually managed campaigns. If those numbers hold at scale, this is genuinely disruptive to how B2B marketing teams are staffed and structured.</p>
+    <p>Here's the nuance that matters for Go1's context: full-auto ad systems optimise for conversion signals, which means they'll optimise for <em>whoever converts fastest</em> — not necessarily the right customer profile. In B2B HR tech with longer sales cycles and multi-stakeholder buying committees, handing the wheel fully to Meta's algorithm without careful guardrails could tank your lead quality even while your CPL drops. The strategic question for your campaigns isn't "should we use this" but "what should we never let it decide." Worth watching closely, and good newsletter content for the marketing leaders in your audience who are being asked by their CFO why they still need a media team.</p>
+    <div class="pull-quote" style="border-color: #51714B; color: #51714B;">
+      "Full-auto ad systems optimise for whoever converts fastest — not necessarily the right customer."
+    </div>
+    <div class="story-source">Demand Gen Report · AI Agentic Marketing Workflows 2026</div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- STORY 10 -->
+<section class="story s10" id="s10">
+  <div class="story-num">10</div>
+  <div class="story-inner">
+    <div class="story-tag" style="letter-spacing: 0.15em; text-transform: uppercase; font-size: 11px; font-weight: 600;">Workplace Culture · Remote Work</div>
+    <h2>The Return-to-Office Bluff Is Falling Apart — and the Data Is Brutal for Anyone Still Mandating It</h2>
+    <span class="big-stat">83%</span>
+    <div class="big-stat-label" style="color: rgba(250,249,244,0.65);">of CEOs want full RTO by 2027. Badge data says employees have other plans.</div>
+    <p>A Stanford/Nature 2026 study found a 33% drop in employee resignations when workers shifted from full-time office attendance to hybrid. Meanwhile, 85% of workers now prioritise flexibility over salary — and 29% say they'd actively look for a new job if their role became fully in-person. Despite all of this, 83% of CEOs are still on record wanting a full return-to-office by 2027. The disconnect between executive aspiration and lived reality has never been wider, and badge-swipe data is settling the debate quietly in employees' favour.</p>
+    <p>For Go1's audience of L&D and HR leaders, this is one of the defining workplace tensions of 2026. The organisations that are winning aren't the ones forcing RTO or going fully remote — they're the ones building intentional learning cultures that work regardless of where people are. That's a campaign angle: "Your learning strategy shouldn't depend on everyone being in the same building." It's also useful context for your own Melbourne-based remote work life, and genuinely relatable content for the Go1 community across ANZ where hybrid norms differ from US mandates.</p>
+    <div class="pull-quote">
+      "A 33% drop in resignations when shifting to hybrid. And 83% of CEOs still want everyone back in the office."
+    </div>
+    <div class="story-source">Stanford/Nature 2026 · FlexJobs · SurveyMonkey Hybrid Work Report</div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <img class="go1-logo" src="https://images.prismic.io/go1-com/aCXYUSdWJ-7kSJ4K_Go1-Charcoal.png?auto=format,compress" alt="Go1" style="height:24px;width:auto;filter:brightness(0) invert(1);opacity:0.5;" />
+  <div class="footer-title">That's your morning.</div>
+  <p>Morning Edition · Wednesday 22 April 2026<br>
+  Curated for Angela Allan · Campaign Content Manager, Go1<br>
+  Sources: HBR · Demand Gen Report · LinkedIn · B2BMX 2026 · Nielsen · Stanford/Nature · ALM Corp · Intellum · Training Industry</p>
+</footer>
+
+</body>
+</html>
